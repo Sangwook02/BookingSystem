@@ -9,14 +9,14 @@ void FlightAccount::addMileage() {
 }
 int FlightAccount::Menu() {
 	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 >> ";
-	char input[50];
+	string input;
 	while (1) {
-		cin.getline(input, 50);
-		if ((int)strlen(input) == 1 && input[0] == 49) {
+		cin >> input;
+		if (input.length() == 1 && input[0] == 49) {
 			cout << "\n회원가입을 시작합니다.\n\n";
 			return 0;
 		}
-		else if ((int)strlen(input) == 1 && input[0] == 50) {
+		else if (input.length()  == 1 && input[0] == 50) {
 			cout << "\n로그인을 시작합니다.\n\n";
 			return 1;
 		}

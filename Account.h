@@ -11,7 +11,7 @@ class Account {
 public:
 	Account();
 	void setUser();
-	void login();
+	int login();
 	void show();
 };
 

@@ -18,7 +18,7 @@ public:
 	void setTime();
 	void setDate();
 	void setWhereToWhere();
-	void Book();
+	int Book();
 	void getFlightCode();
 };
 

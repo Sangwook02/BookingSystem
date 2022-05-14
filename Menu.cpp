@@ -40,7 +40,7 @@ void Menu::getMenu() {
 						
 					}
 					else if (i == 0) {
-						cout << "비행기 예약 종료:1 로그인 재시도:2";
+						cout << "비행기 예약 종료:1 로그인 재시도:2 >> ";
 						string input;
 						
 						cin >> input;

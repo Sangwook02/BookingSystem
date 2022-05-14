@@ -10,7 +10,15 @@ int BookFlight::Book() {
 		getFlightCode();
 	}
 	else {
-		Book(); // 왕복의 경우 돌아오는 항공편 예약을 위한 재귀
+		setWhereToWhere();
+		setDate();
+		setTime();
+		getFlightCode();
+
+		setWhereToWhere();
+		setDate();
+		setTime();
+		getFlightCode();
 	}
 	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
 	string input;

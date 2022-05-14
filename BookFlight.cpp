@@ -61,7 +61,7 @@ void BookFlight::setOnewayOrRound() {
 }
 void BookFlight::setTime() {
 	string input;
-	cout << "시간을 입력하세요 >> ";
+	cout << "시간을 입력하세요 7시:07 12시:12 17시:17 >> ";
 
 	while (1) {
 		cin >>input;

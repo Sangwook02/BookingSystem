@@ -2,9 +2,12 @@
 #include <cstring>
 
 int BookRestaurant::Book() {
-	setTime();
 	setDate();
+	setTime();
 
+	//예약가능한 자리 보여주고 확정받기.
+
+	//예약 후에
 	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
 	string input;
 	cin >> input;
@@ -20,9 +23,35 @@ int BookRestaurant::Book() {
 	}
 }
 
-void BookRestaurant::setTime() {
+int BookRestaurant::WalkIn() {
+	//q.push();
+	cout << q.back();
+	q.pop();
 
+	return 1;
 }
+
+void BookRestaurant::setTime() {
+	cout << "런치와 디너 중 하나를 골라주세요.\n\n" << "런치:1 디너:2 >> ";
+	string input;
+	cin >> input;
+
+	if (input.length() == 1) {
+		if (input[0] == 49) {
+			cout << "런치를 선택했습니다.\n\n";
+		}
+		else if (input[0] == 50) {
+			cout << "디너를 선택했습니다.\n\n";
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
+	}
+	else {
+		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+	}
+}
+
 void BookRestaurant::setDate() {
 	string input;
 	int tmp;

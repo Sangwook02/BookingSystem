@@ -20,6 +20,7 @@ public:
 	void setTime();
 	void setDate();
 	int getFour_q_size();
+	int getSix_q_size();
 };
 
 #endif

@@ -1,20 +1,28 @@
 ﻿#include "Menu.h"
 #include "BookFlight.h"
 #include "FlightAccount.h"
+#include "BookRestaurant.h"
+
 #include <iostream>
 using namespace std;
 
 Menu::Menu() {
 	this->flightSize = 0;
 	user = new FlightAccount[10]; // 수정 필요
+
+	this->restaurantSize = 0;
+	ruser = new RestaurantAccount[10]; // 수정 팔요
 }
 Menu::~Menu() {
 	delete[] user;
+	delete[] ruser;
 }
 
 void Menu::getMenu() {
 	string selectMenu;
 	BookFlight a;
+	BookRestaurant b;
+	string input;
 	cout << "원하는 서비스를 선택하세요\n";
 	while (1) {
 		cout << "\n비행기 예약:1 식당 예약:2 독서실 예약:3 종료:4 >> ";
@@ -41,8 +49,7 @@ void Menu::getMenu() {
 					}
 					else if (i == 0) {
 						cout << "비행기 예약 종료:1 로그인 재시도:2 >> ";
-						string input;
-						
+
 						cin >> input;
 						if (input.length() == 1 && input[0] == 49) {
 							break;
@@ -59,7 +66,59 @@ void Menu::getMenu() {
 			
 		}
 		else if (selectMenu[0] == 50) {
+			while (1) {
+				selected = ruser[restaurantSize].Menu();
+				if (selected == 0) {
+					ruser[restaurantSize].setUser();
+					this->restaurantSize += 1;
+				}
+				else if (selected == 1) {//로그인
+					int i = ruser->login();
+					if (i == 1) {
+						int tmp = 0;
+						while (tmp != 1) {
+							cout << "예약 또는 Walk-in 중에 하나를 선택해주세요\n" << "예약:1 Walk-in:2 >> ";
+							cin >> input;
 
+							if (input.length() == 1 && input[0] == 49) {
+								tmp = b.Book();
+							}
+							else if (input.length() == 1 && input[0] == 50) {
+								string Current = ruser->getCurrentUser();
+								tmp = b.WalkIn(Current);
+								if (b.getFour_q_size() < 3) {
+									cout << "현재 내 앞의 대기팀은 0팀입니다.\n\n";
+								}
+								else {
+									cout << "현재 내 앞의 대기팀은 " << b.getFour_q_size() - 2 << "팀입니다.\n\n";
+								}
+								
+							}
+							else {
+								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+							}
+
+							
+						}
+
+					}
+					else if (i == 0) {
+						cout << "식당 예약 종료:1 로그인 재시도:2 >> ";
+						string input;
+
+						cin >> input;
+						if (input.length() == 1 && input[0] == 49) {
+							break;
+						}
+						else if (input.length() == 1 && input[0] == 50) {
+							continue;
+						}
+						else {
+							cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+						}
+					}
+				}
+			}
 		}
 		else if (selectMenu[0] == 51) {
 

@@ -22,11 +22,11 @@ int BookRestaurant::Book() {
 		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
 	}
 }
-
-int BookRestaurant::WalkIn() {
-	//q.push();
-	cout << q.back();
-	q.pop();
+int BookRestaurant::getFour_q_size() {
+	return four_q.size();
+}
+int BookRestaurant::WalkIn(string id) {
+	four_q.push(id);
 
 	return 1;
 }

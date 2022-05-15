@@ -9,12 +9,15 @@ class Account {
 	string name;
 	string id;
 	int numberOfBooking;
+	string currentUserID;
 public:
 	Account();
 	void setUser();
 	int login();
 	void show();
 	string getID();
+	string getCurrentUser();
+	void setCurrentUser(string id);
 };
 
 #endif

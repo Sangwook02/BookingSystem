@@ -5,7 +5,7 @@ using namespace std;
 #include <string>
 #include <queue>
 #include "Account.h"
-
+#include "Table.h"
 
 class BookRestaurant {
 	queue<string>four_q;
@@ -13,8 +13,10 @@ class BookRestaurant {
 	int date;
 	int time;
 	int month;
+	Table t[9];
 
 public:
+	BookRestaurant();
 	int Book();
 	int WalkIn(string id);
 	void setTime();

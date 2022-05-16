@@ -1,25 +1,47 @@
 ﻿#include "BookRestaurant.h"
 #include <cstring>
 
+BookRestaurant::BookRestaurant() {
+	this->date = 0;
+	this->time = 0;
+	this->month = 0;
+	t[0].setTable("0", 4), t[1].setTable("1", 4), t[2].setTable("2", 4), t[3].setTable("3", 4), t[4].setTable("4", 6), t[5].setTable("5", 6), t[6].setTable("6", 4), t[7].setTable("7", 4), t[8].setTable("8", 6);
+}
+
 int BookRestaurant::Book() {
 	setDate();
 	setTime();
-
+	t->showUpDown();
+	cout << "\t" << "|" << "  "<< t[0].able() << " " << "|" << "\t" << "|" << "  " << t[1].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	t->showUpDown();
+	cout << "\n";
+	t->showUpDown();
+	cout << "\t" << "|" << "  " << t[2].able() << " " << "|" << "\t" << "|" << "  " << t[3].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	t->showUpDown();
+	cout << "\n";
+	t->showUpDown();
+	t->showMid();
+	cout << "\t" << "|" << "  " << t[4].able() << " " << "|" << "\t" << "|" << "  " << t[5].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	t->showMid();
+	t->showUpDown();
 	//예약가능한 자리 보여주고 확정받기.
 
 	//예약 후에
 	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
-	string input;
-	cin >> input;
 
-	if (input.length() == 1 && input[0] == 49) {
-		return 1;
-	}
-	else if (input.length() == 1 && input[0] == 50) {
-		return 0;
-	}
-	else {
-		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+	string input;
+	while (1) {
+		cin >> input;
+
+		if (input.length() == 1 && input[0] == 49) {
+			return 1;
+		}
+		else if (input.length() == 1 && input[0] == 50) {
+			return 0;
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
 	}
 }
 int BookRestaurant::getFour_q_size() {
@@ -40,7 +62,7 @@ int BookRestaurant::WalkIn(string id) {
 		number += tmp * pow(10, size);
 	}
 	//int num에 전체 인원 수 입력 받는 과정.
-	if (number <= 4) {
+	if (number <= 4 && number > 0) {
 		four_q.push(id);
 		if (getFour_q_size() < 3) {
 			cout << "4인 테이블의 현재 내 앞 대기팀은 0팀입니다.\n\n";

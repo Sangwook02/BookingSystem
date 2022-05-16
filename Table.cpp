@@ -34,3 +34,9 @@ string Table::able() {
 		return " ";
 	}
 }
+bool Table::Status() {
+	return available;
+}
+void Table::setStatus() {
+	this->available = false;
+}

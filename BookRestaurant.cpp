@@ -1,5 +1,17 @@
 ﻿#include "BookRestaurant.h"
 #include <cstring>
+int BookRestaurant::take(int n) {
+	if (t[n].Status() == true) {
+		t[n].setStatus();
+		cout << "예약이 완료 되었습니다.\n\n";
+		return 1;
+	}
+	else {
+		cout << "이미 선점된 테이블입니다.\n다른 테이블을 선택해주세요.\n";
+		return 0;
+	}
+	
+}
 
 BookRestaurant::BookRestaurant() {
 	this->date = 0;
@@ -11,6 +23,7 @@ BookRestaurant::BookRestaurant() {
 int BookRestaurant::Book() {
 	setDate();
 	setTime();
+	cout << "-----번호를 골라주세요-----\n0~3번 테이블은 4인석, 4~5번 테이블은 6인석입니다.\n우측의 테이블들은 예약이 불가능한 WALK-IN 테이블입니다.\n\n";
 	t->showUpDown();
 	cout << "\t" << "|" << "  "<< t[0].able() << " " << "|" << "\t" << "|" << "  " << t[1].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
 	t->showUpDown();
@@ -24,12 +37,58 @@ int BookRestaurant::Book() {
 	cout << "\t" << "|" << "  " << t[4].able() << " " << "|" << "\t" << "|" << "  " << t[5].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
 	t->showMid();
 	t->showUpDown();
+	int tmp,b = 0;
+	string input;
+	while (b == 0) {
+		cout << ">> ";
+		cin >> input;
+		cout << "\n";
+		if (input.length() == 1) {
+			if (input[0] == 48) {
+				tmp = 0;
+				b = take(tmp);
+				continue;
+			}
+			else if (input[0] == 49) {
+				tmp = 1;
+				b = take(tmp);
+				continue;
+			}
+			else if (input[0] == 50) {
+				tmp = 2;
+				b = take(tmp);
+				continue;
+			}
+			else if (input[0] == 51) {
+				tmp = 3;
+				b = take(tmp);
+				continue;
+			}
+			else if (input[0] == 52) {
+				tmp = 4;
+				b = take(tmp);
+				continue;
+			}
+			else if (input[0] == 53) {
+				tmp = 5;
+				b = take(tmp);
+				continue;
+			}
+			else {
+				cout << "잘못된 입력입니다. 다시 입력해 주세요.\n";
+			}
+		}
+		else {
+			cout << "잘못된 입력입니다. 다시 입력해 주세요.\n";
+		}
+	}
+
+
 	//예약가능한 자리 보여주고 확정받기.
 
 	//예약 후에
 	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
 
-	string input;
 	while (1) {
 		cin >> input;
 

@@ -15,6 +15,8 @@ public:
 	void showUpDown();
 	void showMid();
 	string able();
+	void setStatus();
+	bool Status();
 };
 
 #endif

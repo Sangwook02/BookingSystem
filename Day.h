@@ -5,4 +5,5 @@
 class Day {
 	Flight Seven, Twelve, Five;
 };
-#endif // !DAY_H
+
+#endif

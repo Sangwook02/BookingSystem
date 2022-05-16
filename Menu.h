@@ -3,6 +3,7 @@
 #include <iostream>
 #include "FlightAccount.h"
 #include "RestaurantAccount.h"
+#include "StudyCafeAccount.h"
 
 
 class Menu {
@@ -11,6 +12,9 @@ class Menu {
 
 	RestaurantAccount* ruser;
 	int restaurantSize;
+
+	StudyCafeAccount* suser;
+	int studyCafeSize;
 public:
 	Menu();
 	~Menu();

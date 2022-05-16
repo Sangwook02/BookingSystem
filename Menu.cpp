@@ -2,16 +2,21 @@
 #include "BookFlight.h"
 #include "FlightAccount.h"
 #include "BookRestaurant.h"
+#include "BookStudyCafe.h"
 
 #include <iostream>
 using namespace std;
 
+
 Menu::Menu() {
 	this->flightSize = 0;
-	user = new FlightAccount[1]; // 수정 필요
+	user = new FlightAccount[100000]; // 수정 필요
 
 	this->restaurantSize = 0;
-	ruser = new RestaurantAccount[10]; // 수정 팔요
+	ruser = new RestaurantAccount[100000]; // 수정 필요
+
+	this->studyCafeSize = 0;
+	suser = new StudyCafeAccount[100000];
 }
 Menu::~Menu() {
 	delete[] user;
@@ -22,6 +27,7 @@ void Menu::getMenu() {
 	string selectMenu;
 	BookFlight a;
 	BookRestaurant b;
+	BookStudyCafe c;
 	string input;
 	cout << "원하는 서비스를 선택하세요\n";
 	while (1) {
@@ -32,7 +38,7 @@ void Menu::getMenu() {
 		if (selectMenu[0] == 49) {
 
 			while (1) {
-				selected = user[flightSize].Menu();
+				selected = user->Menu();
 				if (selected == 0) { //회원가입
 					user[flightSize].setUser();
 					this->flightSize += 1;
@@ -70,7 +76,7 @@ void Menu::getMenu() {
 		}
 		else if (selectMenu[0] == 50) {
 			while (1) {
-				selected = ruser[restaurantSize].Menu();
+				selected = ruser->Menu();
 				if (selected == 0) {
 					ruser[restaurantSize].setUser();
 					this->restaurantSize += 1;
@@ -120,8 +126,38 @@ void Menu::getMenu() {
 				}
 			}
 		}
-		else if (selectMenu[0] == 51) {
+		else if (selectMenu[0] == 51) { //독서실
+			while (1) {
+				selected = suser->Menu();
+				if (selected == 0) {
+					suser[studyCafeSize].set();
+					this->studyCafeSize += 1;
+				}
+				else if (selected == 1) {//로그인
+					int i = suser->login();
+					if (i == 1) {
+						//예약
+					}
+					else if (i == 0) {
+						cout << "독서실 예약 종료:1 로그인 재시도:2 >> ";
+						string input;
 
+						cin >> input;
+						if (input.length() == 1 && input[0] == 49) {
+							break;
+						}
+						else if (input.length() == 1 && input[0] == 50) {
+							continue;
+						}
+						else {
+							cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+						}
+					}
+				}
+				else if (selected == 2) {
+					break;
+				}
+			}
 		}
 		else if (selectMenu[0] == 52) {
 			cout << "\n프로그램을 종료합니다.\n이용해주셔서 감사합니다.";

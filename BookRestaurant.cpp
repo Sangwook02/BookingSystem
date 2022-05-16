@@ -1,8 +1,11 @@
 ﻿#include "BookRestaurant.h"
 #include <cstring>
+
 int BookRestaurant::take(int n) {
-	if (t[n].Status() == true) {
-		t[n].setStatus();
+	int part = 1+time;
+	part += 4 * date;
+	if (t[part][n].Status() == true) {
+		t[part][n].setStatus();
 		cout << "예약이 완료 되었습니다.\n\n";
 		return 1;
 	}
@@ -10,33 +13,50 @@ int BookRestaurant::take(int n) {
 		cout << "이미 선점된 테이블입니다.\n다른 테이블을 선택해주세요.\n";
 		return 0;
 	}
-	
 }
 
 BookRestaurant::BookRestaurant() {
 	this->date = 0;
 	this->time = 0;
-	this->month = 0;
-	t[0].setTable("0", 4), t[1].setTable("1", 4), t[2].setTable("2", 4), t[3].setTable("3", 4), t[4].setTable("4", 6), t[5].setTable("5", 6), t[6].setTable("6", 4), t[7].setTable("7", 4), t[8].setTable("8", 6);
+	for (int i = 0; i < 29; i++) {
+
+		t[i][0].setTable("0", 4);
+		t[i][1].setTable("1", 4);
+		t[i][2].setTable("2", 4);
+		t[i][3].setTable("3", 4);
+		t[i][4].setTable("4", 6);
+		t[i][5].setTable("5", 6);
+		t[i][6].setTable("6", 4);
+		t[i][7].setTable("7", 4);
+		t[i][8].setTable("8", 6);
+	}
 }
 
 int BookRestaurant::Book() {
 	setDate();
 	setTime();
+	int part = 1 + time;
+	part += (4 * date);
 	cout << "-----번호를 골라주세요-----\n0~3번 테이블은 4인석, 4~5번 테이블은 6인석입니다.\n우측의 테이블들은 예약이 불가능한 WALK-IN 테이블입니다.\n\n";
-	t->showUpDown();
-	cout << "\t" << "|" << "  "<< t[0].able() << " " << "|" << "\t" << "|" << "  " << t[1].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
-	t->showUpDown();
+
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+	cout << "\t" << "|" << "  "<< t[part][0].able() << " " << "|" << "\t" << "|" << "  " << t[part][1].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+
 	cout << "\n";
-	t->showUpDown();
-	cout << "\t" << "|" << "  " << t[2].able() << " " << "|" << "\t" << "|" << "  " << t[3].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
-	t->showUpDown();
+
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+	cout << "\t" << "|" << "  " << t[part][2].able() << " " << "|" << "\t" << "|" << "  " << t[part][3].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+
 	cout << "\n";
-	t->showUpDown();
-	t->showMid();
-	cout << "\t" << "|" << "  " << t[4].able() << " " << "|" << "\t" << "|" << "  " << t[5].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
-	t->showMid();
-	t->showUpDown();
+
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+	cout << "\t" << "|" << "    " << "|" << "\t" << "|" << "    " << "|" << "\t\t" << "|" << "    " << "|" << "\n";;
+	cout << "\t" << "|" << "  " << t[part][4].able() << " " << "|" << "\t" << "|" << "  " << t[part][5].able() << " " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	cout << "\t" << "|" << "    " << "|" << "\t" << "|" << "    " << "|" << "\t\t" << "|" << "    " << "|" << "\n";
+	cout << "\t" << "ㅡㅡㅡ" << "\t" << "ㅡㅡㅡ" << "\t\t" << "ㅡㅡㅡ" << "\n";
+
 	int tmp,b = 0;
 	string input;
 	while (b == 0) {
@@ -91,7 +111,7 @@ int BookRestaurant::Book() {
 
 	while (1) {
 		cin >> input;
-
+		cout << "\n";
 		if (input.length() == 1 && input[0] == 49) {
 			return 1;
 		}
@@ -236,20 +256,20 @@ void BookRestaurant::setTime() {
 void BookRestaurant::setDate() {
 	string input;
 	int tmp;
-	cout << "\n방문 날짜를 입력하세요(예: 05 19) >> ";
+	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n방문 날짜를 입력하세요(예: 05 19) >> ";
 	while(1) {
 		cin.ignore();
 		getline(cin, input);
 
 		if (input.length() == 5) {
 			if (input[2] == ' ') {
-				tmp = (int)input[0] * 10;
-				tmp += (int)input[1];
-				this->month = tmp;
+				int number = 0;
+				tmp = input[3] - '0';
+				number += tmp * 10;
+				number += input[4] - '0';
 
-				tmp = (int)input[3] * 10;
-				tmp += (int)input[4];
-				this->date = tmp;
+				this->date = number -17;
+				cout << date;
 				cout << "\n";
 				break;
 			}

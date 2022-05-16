@@ -12,8 +12,8 @@ class BookRestaurant {
 	queue<string>six_q;
 	int date;
 	int time;
-	int month;
-	Table t[9];
+
+	Table t[30][9];
 
 public:
 	BookRestaurant();

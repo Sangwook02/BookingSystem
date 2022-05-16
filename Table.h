@@ -12,8 +12,6 @@ public:
 	Table(string code, int capacity);
 	void getID();
 	void setTable(string code, int capacity);
-	void showUpDown();
-	void showMid();
 	string able();
 	void setStatus();
 	bool Status();

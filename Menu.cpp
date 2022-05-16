@@ -8,7 +8,7 @@ using namespace std;
 
 Menu::Menu() {
 	this->flightSize = 0;
-	user = new FlightAccount[10]; // 수정 필요
+	user = new FlightAccount[1]; // 수정 필요
 
 	this->restaurantSize = 0;
 	ruser = new RestaurantAccount[10]; // 수정 팔요

@@ -62,6 +62,9 @@ void Menu::getMenu() {
 						}
 					}
 				}
+				else if (selected == 2) {
+					break;
+				}
 			}
 			
 		}
@@ -86,12 +89,6 @@ void Menu::getMenu() {
 							else if (input.length() == 1 && input[0] == 50) {
 								string Current = ruser->getCurrentUser();
 								tmp = b.WalkIn(Current);
-								if (b.getFour_q_size() < 3) {
-									cout << "현재 내 앞의 대기팀은 0팀입니다.\n\n";
-								}
-								else {
-									cout << "현재 내 앞의 대기팀은 " << b.getFour_q_size() - 2 << "팀입니다.\n\n";
-								}
 								
 							}
 							else {
@@ -117,6 +114,9 @@ void Menu::getMenu() {
 							cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
 						}
 					}
+				}
+				else if (selected == 2) {
+					break;
 				}
 			}
 		}

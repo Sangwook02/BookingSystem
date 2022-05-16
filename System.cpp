@@ -10,6 +10,7 @@ int main() {
 	Airport Kimhae1("KHGP"), Kimhae2("KHCJ"), Kimhae4("KHGJ"), Kimhae5("KHDG");
 	Airport Gwangju1("GJGP"), Gwangju2("GJCJ"), Gwangju3("GJKH"), Gwangju5("GJDG");
 	Airport Daegu1("DGGP"), Daegu2("DGCJ"), Daegu3("DGKH"), Daegu4("DGGJ");
+
 	run.getMenu();
 	return 0;
 }

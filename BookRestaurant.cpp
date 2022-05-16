@@ -29,7 +29,7 @@ int BookRestaurant::getSix_q_size() {
 	return six_q.size();
 }
 int BookRestaurant::WalkIn(string id) {
-	cout << "인원 수를 입력해주세요\n최대 14명까지 이용 가능합니다.\n\n";
+	cout << "인원 수를 입력해주세요\n최대 14명까지 이용 가능합니다.\n\n>>";
 	string num;
 	cin >> num;
 	int number = 0, tmp;
@@ -106,20 +106,42 @@ int BookRestaurant::WalkIn(string id) {
 	}
 	
 
-	return 1;
+	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
+	string input;
+	cin >> input;
+
+	if (input.length() == 1 && input[0] == 49) {
+		return 1;
+	}
+	else if (input.length() == 1 && input[0] == 50) {
+		return 0;
+	}
+	else {
+		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+	}
 }
 
 void BookRestaurant::setTime() {
-	cout << "런치와 디너 중 하나를 골라주세요.\n\n" << "런치:1 디너:2 >> ";
+	cout << "시간을 골라주세요.\n\n<런치>\n12시:1 13시:2\n\n<디너>\n18시:3 19시:4\n>> ";
 	string input;
 	cin >> input;
 
 	if (input.length() == 1) {
 		if (input[0] == 49) {
-			cout << "런치를 선택했습니다.\n\n";
+			cout << "런치 12시를 선택했습니다.\n\n";
+			this->time = 12;
 		}
 		else if (input[0] == 50) {
-			cout << "디너를 선택했습니다.\n\n";
+			cout << "런치 13시를 선택했습니다.\n\n";
+			this->time = 13;
+		}
+		else if (input[0] == 51) {
+			cout << "디너 18시를 선택했습니다.\n\n";
+			this->time = 18;
+		}
+		else if (input[0] == 52) {
+			cout << "디너 19시를 선택했습니다.\n\n";
+			this->time = 19;
 		}
 		else {
 			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";

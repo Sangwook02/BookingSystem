@@ -10,13 +10,13 @@ using namespace std;
 
 Menu::Menu() {
 	this->flightSize = 0;
-	user = new FlightAccount[100000]; // 수정 필요
+	user = new FlightAccount[1000]; // 수정 필요
 
 	this->restaurantSize = 0;
-	ruser = new RestaurantAccount[100000]; // 수정 필요
+	ruser = new RestaurantAccount[1000]; // 수정 필요
 
 	this->studyCafeSize = 0;
-	suser = new StudyCafeAccount[100000];
+	suser = new StudyCafeAccount[1000];
 }
 Menu::~Menu() {
 	delete[] user;
@@ -26,9 +26,9 @@ Menu::~Menu() {
 
 void Menu::getMenu() {
 	string selectMenu;
-	BookFlight a;
-	BookRestaurant b;
-	BookStudyCafe c;
+	BookFlight *p = new BookFlight();
+	BookRestaurant*q = new BookRestaurant();
+	BookStudyCafe*r = new BookStudyCafe();
 	string input;
 	cout << "원하는 서비스를 선택하세요\n";
 	while (1) {
@@ -50,7 +50,7 @@ void Menu::getMenu() {
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
-							tmp = a.Book();
+							tmp = p->Book();
 						}
 						
 					}
@@ -91,11 +91,11 @@ void Menu::getMenu() {
 							cin >> input;
 
 							if (input.length() == 1 && input[0] == 49) {
-								tmp = b.Book();
+								tmp = q->Book();
 							}
 							else if (input.length() == 1 && input[0] == 50) {
 								string Current = ruser->getCurrentUser();
-								tmp = b.WalkIn(Current);
+								tmp = q->WalkIn(Current);
 								
 							}
 							else {
@@ -138,7 +138,7 @@ void Menu::getMenu() {
 					int i = suser->login();
 					if (i == 1) {
 						//예약
-						c.Book();
+						r->Book();
 					}
 					else if (i == 0) {
 						cout << "독서실 예약 종료:1 로그인 재시도:2 >> ";

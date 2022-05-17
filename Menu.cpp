@@ -21,6 +21,7 @@ Menu::Menu() {
 Menu::~Menu() {
 	delete[] user;
 	delete[] ruser;
+	delete[] suser;
 }
 
 void Menu::getMenu() {
@@ -137,6 +138,7 @@ void Menu::getMenu() {
 					int i = suser->login();
 					if (i == 1) {
 						//예약
+						c.Book();
 					}
 					else if (i == 0) {
 						cout << "독서실 예약 종료:1 로그인 재시도:2 >> ";

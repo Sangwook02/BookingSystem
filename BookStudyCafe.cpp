@@ -7,6 +7,7 @@ int BookStudyCafe::Book() {
 	return 0;
 }
 
+
 void BookStudyCafe::setTime() {
 	string input;
 	int total = 0;

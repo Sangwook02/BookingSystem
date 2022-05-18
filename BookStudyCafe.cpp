@@ -1,8 +1,8 @@
 ﻿#include "BookStudyCafe.h"
 
-int BookStudyCafe::take(int part, int a, int b) {
+int BookStudyCafe::take(int part, int a, int b, int sex) {
 	if (s[part][a][b].Status() == true) {
-		s[part][a][b].setStatus();
+		s[part][a][b].setStatus(sex);
 		cout << "예약이 완료 되었습니다.\n\n";
 		return 1;
 	}
@@ -14,11 +14,33 @@ int BookStudyCafe::take(int part, int a, int b) {
 
 
 
-int BookStudyCafe::Book() {
+int BookStudyCafe::Book(int sex) {
+	int number = 0,tmp;
+	string num;
+	while (1) {
+		cout << "이용자의 나이를 입력해주세요.(예: 17) >> ";
+		cin >> num;
+		number = 0;
+		int size = (int)num.size();
+		for (int i = 0; i < num.size(); i++) {
+			tmp = num[i] - '0';
+			size -= 1;
+			number += tmp * pow(10, size);
+		}
+		if (number >= 14) {
+			break;
+		}
+		else if (number < 14) {
+			cout << "13세 이하는 독서실을 이용할 수 없습니다.\n죄송합니다.\n\n";
+			return 0;
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
+	}
 	setDate();
 	setTime();
 	//자리 선택
-	string num;
 	for (int i = 0; i < 14; i++) {
 		if (time[i] == 1) {
 			//자리 보여주고 예약 받기
@@ -26,7 +48,28 @@ int BookStudyCafe::Book() {
 			for (int m = 0; m < 15; m++) {
 				cout << "\t|";
 				for (int n = 0; n < 15; n++) {
-					s[14 * date + i][m][n].able();
+					if (s[14*date + i][m-1][n].getUserSex() == 0 || sex != s[14*date + i][m-1][n].getUserSex()) {
+						if (s[14 * date + i][m + 1][n].getUserSex() == 0 || sex != s[14 * date + i][m + 1][n].getUserSex()) {
+							if (s[14 * date + i][m][n-1].getUserSex() == 0 || sex != s[14 * date + i][m][n-1].getUserSex()) {
+								if (s[14 * date + i][m][n+1].getUserSex() == 0 || sex != s[14 * date + i][m][n+1].getUserSex()) {
+									s[14 * date + i][m][n].able();
+								}
+								else {
+									cout << "   ";
+								}
+							}
+							else {
+								cout << "   ";
+							}
+						}
+						else {
+							cout << "   ";
+						}
+						
+					}
+					else {
+						cout << "   ";
+					}
 					cout << "|";
 				}
 				cout << "\n\t-------------------------------------------------------------\n";
@@ -43,7 +86,7 @@ int BookStudyCafe::Book() {
 					number += tmp * pow(10, size);
 				}
 				if (number < 225 && number >= 0) {
-					b = take(14 * date + i, number / 15, number % 15);
+					b = take(14 * date + i, (number / 15), (number % 15), sex);
 				}
 				else {
 					cout << "잘못된 입력입니다. 다시 입력해주세요.\n";
@@ -51,14 +94,14 @@ int BookStudyCafe::Book() {
 			}
 		}
 	}
-	return 0;
+	return 1;
 }
 
 BookStudyCafe::BookStudyCafe() {
 	for (int i = 0; i < 98; i++) {
-		for (int j = 0; j < 15; j++) {
-			for (int k = 0; k < 15; k++) {
-				s[i][j][k].setSeat((15*j)+k);
+		for (int j = 0; j < 16; j++) {
+			for (int k = 0; k < 16; k++) {
+				s[i][j][k].setSeat((15*j)+k);//
 			}
 		}
 	}
@@ -115,7 +158,7 @@ void BookStudyCafe::setTime() {
 		for (int j = 0; j < num.size(); j++) {
 			tmp = num[j] - '0';
 			size -= 1;
-			number += tmp * pow(10, size);
+			number += (tmp * pow(10, size));
 		}
 		k = number-9;
 		time[k] = 1;

@@ -7,7 +7,7 @@ using namespace std;
 class Seat {
 	bool available;
 	int seatNumber;
-	int sex; //여자1, 남자 2, 초기화 상태 0
+	int sex; //여자2, 남자 1, 초기화 상태 0
 	int id; //초기화 상태 -1
 	int roomNumber; //초기화 상태 0
 public:
@@ -17,7 +17,7 @@ public:
 	void setSeat(int seatNumber);
 	bool Status();
 	void able();
-	void setStatus();
+	void setStatus(int sex);
 };
 
 #endif

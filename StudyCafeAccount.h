@@ -11,12 +11,17 @@ class StudyCafeAccount {
 	static map<int, string> user;
 	int roomNumber;
 	int id;
+	int currentUserSex;
 	int numberOfBooking;
 public:
 	int Menu();
 	void set();
 	int login();
 	void addUserID();
+	int getID();
+	int getSex();
+	void setCurrentUserSex(int sex);
+	int getCurrentUserSex();
 };
 
 #endif

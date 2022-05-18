@@ -3,6 +3,13 @@
 int StudyCafeAccount::userID = 0;
 map<int, string> StudyCafeAccount::user;
 
+int StudyCafeAccount::getID() {
+	return id;
+}
+
+int StudyCafeAccount::getSex() {
+	return sex;
+}
 int StudyCafeAccount::Menu() {
 	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 뒤로 가기:3 >> ";
 	string input;
@@ -58,7 +65,12 @@ void StudyCafeAccount::set() { //회원가입
 void StudyCafeAccount::addUserID() {
 	this->userID += 1;
 }
-
+void StudyCafeAccount::setCurrentUserSex(int sex) {
+	this->currentUserSex = sex;
+}
+int StudyCafeAccount::getCurrentUserSex() {
+	return currentUserSex;
+}
 int StudyCafeAccount::login() {
 	cout << "아이디를 입력하세요 >> ";
 	string num, pw;
@@ -80,6 +92,32 @@ int StudyCafeAccount::login() {
 
 	if (user[i] == pw) {
 		cout << "\n---로그인 성공---\n\n";
+		//성별 입력
+		while (1) {
+			cout << "이용자의 성별을 입력해주세요.(남자:1 여자:2) >> ";
+			cin >> num;
+			number = 0;
+			int size = (int)num.size();
+			for (int i = 0; i < num.size(); i++) {
+				tmp = num[i] - '0';
+				size -= 1;
+				number += tmp * pow(10, size);
+			}
+			if (number == 1) {
+				this->sex = 1;
+				setCurrentUserSex(1);
+				break;
+			}
+			else if (number == 2) {
+				this->sex = 2;
+				setCurrentUserSex(2);
+				break;
+			}
+			else {
+				cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+			}
+		}
+
 		return 1;
 	}
 	else {

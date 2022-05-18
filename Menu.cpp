@@ -136,9 +136,15 @@ void Menu::getMenu() {
 				}
 				else if (selected == 1) {//로그인
 					int i = suser->login();
+					int tmp = 0;
 					if (i == 1) {
 						//예약
-						r->Book();
+						int now;
+						while (tmp == 0) {
+							now = suser->getCurrentUserSex();
+							tmp = r->Book(now);
+						}
+						
 					}
 					else if (i == 0) {
 						cout << "독서실 예약 종료:1 로그인 재시도:2 >> ";

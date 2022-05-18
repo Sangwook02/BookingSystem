@@ -18,8 +18,9 @@ Seat::Seat() {
 bool Seat::Status() {
 	return available;
 }
-void Seat::setStatus() {
+void Seat::setStatus(int sex) {
 	this->available = false;
+	this->sex = sex;
 }
 void Seat::able() {
 	if (available == true) {

@@ -13,7 +13,7 @@ Account::Account() {
 	this->numberOfBooking = 0;
 }
 
-void Account::setUser() { //회원가입
+void Account::setUser(int n) { //회원가입
 	cout << "이름을 입력하십시오: ";
 	string name;
 	cin >> name;
@@ -73,7 +73,12 @@ void Account::setUser() { //회원가입
 		}
 	}
 	//요구 사항 준수했는지 확인 필요
-	user.insert(make_pair(id, pw));
+	if (n == 1) {
+		flight.insert(make_pair(id, pw));
+	}
+	else if (n == 2) {
+		rest.insert(make_pair(id, pw));
+	}
 	cout << "\n\n회원가입이 완료되었습니다.\n";
 }
 string Account::getID() {
@@ -82,25 +87,37 @@ string Account::getID() {
 void Account::show() { //제출 전 삭제
 	string id;
 	cin >> id;
-	cout << user[id];
+	cout << flight[id];
 }
 
-int Account::login() {
+int Account::login(int n) {
 	char input[50];
 	cout << "아이디를 입력하세요>> ";
 	string id, pw;
 	cin >> id;
 	cout << "비밀번호를 입력하세요>> ";
 	cin >> pw;
-
-	if (user[id] == pw) {
-		cout << "\n---로그인 성공---\n\n";
-		setCurrentUser(id);
-		return 1;
+	if (n == 1) {
+		if (flight[id] == pw) {
+			cout << "\n---로그인 성공---\n\n";
+			setCurrentUser(id);
+			return 1;
+		}
+		else {
+			cout << "\n---로그인 실패---\n\n";
+			return 0;
+		}
 	}
-	else {
-		cout << "\n---로그인 실패---\n\n";
-		return 0;
+	else if (n == 2) {
+		if (rest[id] == pw) {
+			cout << "\n---로그인 성공---\n\n";
+			setCurrentUser(id);
+			return 1;
+		}
+		else {
+			cout << "\n---로그인 실패---\n\n";
+			return 0;
+		}
 	}
 
 }

@@ -7,7 +7,6 @@
 #include <iostream>
 using namespace std;
 
-
 Menu::Menu() {
 	this->flightSize = 0;
 	user = new FlightAccount[1000]; // 수정 필요
@@ -37,20 +36,20 @@ void Menu::getMenu() {
 		int selected;
 
 		if (selectMenu[0] == 49) {
-
 			while (1) {
 				selected = user->Menu();
 				if (selected == 0) { //회원가입
-					user[flightSize].setUser();
+					user[flightSize].setUser(1);
 					this->flightSize += 1;
 					
 				}
 				else if (selected == 1) {//로그인
-					int i = user->login();
+					int i = user->login(1);
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
 							tmp = p->Book();
+							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
 						}
 					}
 					else if (i == 0) {
@@ -78,14 +77,15 @@ void Menu::getMenu() {
 			while (1) {
 				selected = ruser->Menu();
 				if (selected == 0) {
-					ruser[restaurantSize].setUser();
+					ruser[restaurantSize].setUser(2);
 					this->restaurantSize += 1;
 				}
 				else if (selected == 1) {//로그인
-					int i = ruser->login();
+					int i = ruser->login(2);
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
+							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
 							cout << "7세 이하의 미취학 아동이 있습니까? (y/n) >> ";
 							cin >> input;
 							if (input == "y") {
@@ -151,6 +151,7 @@ void Menu::getMenu() {
 						//예약
 						int now;
 						while (tmp == 0) {
+							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
 							now = suser->getCurrentUserSex();
 							tmp = r->Book(now);
 						}

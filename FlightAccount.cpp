@@ -1,6 +1,8 @@
 ﻿#include "FlightAccount.h"
 #include "Menu.h"
 
+
+
 FlightAccount::FlightAccount() {
 	this->mileage = 0;
 }

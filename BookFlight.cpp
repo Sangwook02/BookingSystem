@@ -1,13 +1,17 @@
 ﻿#include "BookFlight.h"
+#include "Airport.h"
 #include <cstring>
-int BookFlight::Book() {
 
+
+int BookFlight::Book() {
+	
 	setOnewayOrRound();
 	if (this->onewayOrRound == 1) {
 		setWhereToWhere();
 		setDate();
 		setTime();
 		getFlightCode();
+		a[this->departure].take(this->departure, this->date, time);
 	}
 	else {//왕복의 경우
 		
@@ -15,31 +19,38 @@ int BookFlight::Book() {
 		setDate();
 		setTime();
 		getFlightCode();
+		a[this->departure].take(this->departure, date, time);
+
 		this->flightCode = "";
 		string tmp;
-		tmp = this->departure;
-		this->departure = this->arrival;
-		this->arrival = tmp;
-		this->flightCode += this->departure;
-		this->flightCode += this->arrival;
+		tmp = this->departureCode;
+		this->departureCode = this->arrivalCode;
+		this->arrivalCode = tmp;
+		this->flightCode += this->departureCode;
+		this->flightCode += this->arrivalCode;
 		setDate();
 		setTime();
 		getFlightCode();
+		a[this->departure].take(this->departure, date, time);
 	}
-	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
 	string input;
-	cin >> input;
+	while (1) {
+		cout << "\n로그아웃:1 계속 예약하기:2 >> ";
 
-	if (input.length() == 1 && input[0] == 49) {
-		return 1;
-	}
-	else if (input.length() == 1 && input[0] == 50) {
-		return 0;
-	}
-	else {
-		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		cin >> input;
+
+		if (input.length() == 1 && input[0] == 49) {
+			return 1;
+		}
+		else if (input.length() == 1 && input[0] == 50) {
+			return 0;
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
 	}
 }
+
 
 void BookFlight::setOnewayOrRound() {
 	string input;
@@ -98,26 +109,27 @@ void BookFlight::setTime() {
 }
 void BookFlight::setDate() {
 	string input;
-	cout << "\n출발 날짜를 입력하세요(예: 05 19) >> ";
 	int tmp;
+	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n출발 날짜를 입력하세요(예: 05 19) >> ";
 	while (1) {
 		cin.ignore();
 		getline(cin, input);
 
-		if (input[2] == ' ') {
-			tmp = (int)input[0] * 10;
-			tmp += (int)input[1];
-			this->month = tmp;
-			this->flightCode += input[0];
-			this->flightCode += input[1];
+		if (input.length() == 5) {
+			if (input[2] == ' ') {
+				int number = 0;
+				tmp = input[3] - '0';
+				number += tmp * 10;
+				number += input[4] - '0';
 
-			tmp = (int)input[3] * 10;
-			tmp += (int)input[4];
-			this->date = tmp;
-			this->flightCode += input[3];
-			this->flightCode += input[4];
-			cout << "\n";
-			break;
+				this->date = number - 17;
+				cout << date;
+				cout << "\n";
+				break;
+			}
+			else {
+				cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+			}
 		}
 		else {
 			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
@@ -131,31 +143,36 @@ void BookFlight::setWhereToWhere() { //김포:1GP 제주:2CJ 김해:3KH 광주:4
 		cin >> input;
 		if (input.length() == 1 && input[0] == 49) {
 			cout << "\n김포 공항이 출발지로 선택되었습니다.\n";
-			this->departure = "GP";
+			this->departureCode = "GP";
+			this->departure = 0;
 			this->flightCode = "GP";
 			break;
 		}
 		else if (input.length() == 1 && input[0] == 50) {
 			cout << "\n제주 공항이 출발지로 선택되었습니다.\n";
-			this->departure = "CJ";
+			this->departureCode = "CJ";
+			this->departure = 1;
 			this->flightCode = "CJ";
 			break;
 		}
 		else if (input.length() == 1 && input[0] == 51) {
 			cout << "\n김해 공항이 출발지로 선택되었습니다.\n";
-			this->departure = "KH";
+			this->departureCode = "KH";
+			this->departure = 2;
 			this->flightCode = "KH";
 			break;
 		}
 		else if (input.length() == 1 && input[0] == 52) {
 			cout << "\n광주 공항이 출발지로 선택되었습니다.\n";
-			this->departure = "GJ";
+			this->departureCode = "GJ";
+			this->departure = 3;
 			this->flightCode = "GJ";
 			break;
 		}
 		else if (input.length() == 1 && input[0] == 53) {
 			cout << "\n대구 공항이 출발지로 선택되었습니다.\n";
-			this->departure = "DG";
+			this->departureCode = "DG";
+			this->departure = 4;
 			this->flightCode = "DG";
 			break;
 		}
@@ -167,33 +184,38 @@ void BookFlight::setWhereToWhere() { //김포:1GP 제주:2CJ 김해:3KH 광주:4
 	cout << "\n도착지를 선택하세요\n김포:1 제주:2 김해:3 광주:4 대구:5 >> ";
 	while (1) {
 		cin >> input;
-		if (input.length() == 1 && input[0] == 49 && this->departure != "GP") {
+		if (input.length() == 1 && input[0] == 49 && this->departureCode != "GP") {
 			cout << "\n김포 공항이 도착지로 선택되었습니다.\n";
-			this->arrival = "GP";
+			this->arrivalCode = "GP";
+			this->arrival = 0;
 			this->flightCode  += "GP";
 			break;
 		}
-		else if (input.length() == 1 && input[0] == 50 && this->departure != "CJ") {
+		else if (input.length() == 1 && input[0] == 50 && this->departureCode != "CJ") {
 			cout << "\n제주 공항이 도착지로 선택되었습니다.\n";
-			this->arrival = "CJ";
+			this->arrivalCode = "CJ";
+			this->arrival = 1;
 			this->flightCode += "CJ";
 			break;
 		}
-		else if (input.length() == 1 && input[0] == 51 && this->departure != "KH") {
+		else if (input.length() == 1 && input[0] == 51 && this->departureCode != "KH") {
 			cout << "\n김해 공항이 도착지로 선택되었습니다.\n";
-			this->arrival = "KH";
+			this->arrivalCode = "KH";
+			this->arrival = 2;
 			this->flightCode += "KH";
 			break;
 		}
-		else if (input.length() == 1 && input[0] == 52 && this->departure != "GJ") {
+		else if (input.length() == 1 && input[0] == 52 && this->departureCode != "GJ") {
 			cout << "\n광주 공항이 도착지로 선택되었습니다.\n";
-			this->arrival = "GJ";
+			this->arrivalCode = "GJ";
+			this->arrival = 3;
 			this->flightCode += "GJ";
 			break;
 		}
-		else if (input.length() == 1 && input[0] == 53 && this->departure != "DG") {
+		else if (input.length() == 1 && input[0] == 53 && this->departureCode != "DG") {
 			cout << "\n대구 공항이 도착지로 선택되었습니다.\n";
-			this->arrival = "DG";
+			this->arrivalCode = "DG";
+			this->arrival = 4;
 			this->flightCode += "DG";
 			break;
 		}

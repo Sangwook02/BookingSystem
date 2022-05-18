@@ -1,41 +1,55 @@
 ﻿#include "Flight.h"
 
 Flight::Flight() {
+	for (int i = 0; i < 9; i++) {
+		this->status[i] = 0;
+	}
+}
+void Flight::setStatus(int idx) {
+	this->status[idx] = 1;
+	//this->seat[idx] = 
+}
 
+int Flight::getStatus(int idx) {
+	return this->status[idx];
 }
 void Flight::showLeftSeat() {
 
 	cout << "***현재 잔여 좌석입니다.***\n\n";
 	cout << "\t\t\t앞\n\n";
 	cout << "\t\t";
-	if (leftSeat[1] == 1) {
-		cout << "X\t\t";
+
+	if (status[1] == 1) {
+		cout << "\t\t";
 	}
-	else if (leftSeat[1] == 0) {
-		cout << "O\t\t";
+	else if (status[1] == 0) {
+		cout <<"1\t\t";
 	}
-	if (leftSeat[2] == 1) {
-		cout << "X\n";
+
+	if (status[2] == 1) {
+		cout << "\n";
 	}
-	else if (leftSeat[2] == 0) {
-		cout << "O\n";
+	else if (status[2] == 0) {
+		cout << "2\n";
 	}
+
 	cout << "\n\t";
+
 	for (int i = 3; i <= 5; i++) {
-		if (leftSeat[i] == 1) {
-			cout << "X\t\t ";
+		if (status[i] == 1) {
+			cout << "\t\t ";
 		}
-		else if (leftSeat[i] == 0) {
-			cout << "O\t\t ";
+		else if (status[i] == 0) {
+			cout << i<< "\t\t ";
 		}
 	}
 	cout << "\n\n\t";
 	for (int i = 6; i <= 8; i++) {
-		if (leftSeat[i] == 1) {
-			cout << "X\t\t ";
+		if (status[i] == 1) {
+			cout << "\t\t ";
 		}
-		else if (leftSeat[i] == 0) {
-			cout << "O\t\t ";
+		else if (status[i] == 0) {
+			cout << i<<  "\t\t ";
 		}
 	}
 	cout << "\n\n\t\t\t뒤\n";

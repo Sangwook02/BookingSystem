@@ -26,7 +26,7 @@ Menu::~Menu() {
 
 void Menu::getMenu() {
 	string selectMenu;
-	BookFlight *p = new BookFlight();
+	BookFlight*p = new BookFlight();
 	BookRestaurant*q = new BookRestaurant();
 	BookStudyCafe*r = new BookStudyCafe();
 	string input;
@@ -52,7 +52,6 @@ void Menu::getMenu() {
 						while (tmp != 1) {
 							tmp = p->Book();
 						}
-						
 					}
 					else if (i == 0) {
 						cout << "비행기 예약 종료:1 로그인 재시도:2 >> ";

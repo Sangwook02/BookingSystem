@@ -18,14 +18,27 @@ void Account::setUser() { //회원가입
 	string name;
 	cin >> name;
 	this->name = name;
-
+	int cntAlpha = 0,cntNumber = 0;
 	
 	string id;
 	while (1) {
 		cout << "아이디를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
 		cin >> id;
 		if (id.size() >= 9) {
-			break;
+			for (int i = 0; i < id.size(); i++) {
+				if (isalpha(id[i]) == 2) {
+					cntAlpha++;
+				}
+				else if (id[i] > 47 && id[i] < 58) {
+					cntNumber++;
+				}
+			}
+			if (cntAlpha + cntNumber > 8) {
+				break;
+			}
+			else {
+				cout << "잘못된 입력입니다.\n다시 ";
+			}
 		}
 		else {
 			cout << "\n잘못된 입력입니다.\n다시 ";
@@ -40,7 +53,20 @@ void Account::setUser() { //회원가입
 		cin >> pw;
 
 		if (pw.size() >= 9) {
-			break;
+			for (int i = 0; i < pw.size(); i++) {
+				if (isalpha(pw[i]) == 2) {
+					cntAlpha++;
+				}
+				else if (pw[i] > 47 && pw[i] < 58) {
+					cntNumber++;
+				}
+			}
+			if (cntAlpha + cntNumber > 8) {
+				break;
+			}
+			else {
+				cout << "잘못된 입력입니다.\n다시 ";
+			}
 		}
 		else {
 			cout << "\n잘못된 입력입니다.\n다시 ";

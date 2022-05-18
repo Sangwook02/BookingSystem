@@ -32,7 +32,7 @@ int BookStudyCafe::Book(int sex) {
 		}
 		else if (number < 14) {
 			cout << "13세 이하는 독서실을 이용할 수 없습니다.\n죄송합니다.\n\n";
-			return 0;
+			return 1;
 		}
 		else {
 			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
@@ -76,6 +76,7 @@ int BookStudyCafe::Book(int sex) {
 			}
 			int b = 0;
 			while (b == 0) {
+				cout << ">> ";
 				cin >> num;
 
 				int number = 0, tmp;
@@ -169,7 +170,7 @@ void BookStudyCafe::setTime() {
 void BookStudyCafe::setDate() {
 	string input;
 	int tmp;
-	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n방문 날짜를 입력하세요(예: 05 19) >> ";
+	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n이용 날짜를 입력하세요(예: 05 19) >> ";
 	while (1) {
 		cin.ignore();
 		getline(cin, input);

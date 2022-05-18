@@ -10,7 +10,6 @@ class Table {
 public:
 	Table();
 	Table(string code, int capacity);
-	void getID();
 	void setTable(string code, int capacity);
 	string able();
 	void setStatus();

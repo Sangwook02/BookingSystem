@@ -11,9 +11,6 @@ Table::Table(string code, int capacity) {
 	this->capacity = 0;
 	this->code = "0";
 }
-void Table::getID() {
-
-}
 void Table::setTable(string code, int capacity) {
 	this->available = true;
 	this->capacity = capacity;

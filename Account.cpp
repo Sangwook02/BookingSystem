@@ -19,15 +19,33 @@ void Account::setUser() { //회원가입
 	cin >> name;
 	this->name = name;
 
-	cout << "아이디를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
+	
 	string id;
-	cin >> id;
+	while (1) {
+		cout << "아이디를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
+		cin >> id;
+		if (id.size() >= 9) {
+			break;
+		}
+		else {
+			cout << "\n잘못된 입력입니다.\n다시 ";
+		}
+	}
 	this->id = id;
 	//데이터베이스에 중복되는 아이디  있는지 확인 하는 코드 삽입 필요.
 	//요구 사항 준수했는지 확인 필요
-	cout << "비밀번호를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
 	string pw;
-	cin >> pw;
+	while (1) {
+		cout << "비밀번호를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
+		cin >> pw;
+
+		if (pw.size() >= 9) {
+			break;
+		}
+		else {
+			cout << "\n잘못된 입력입니다.\n다시 ";
+		}
+	}
 	//요구 사항 준수했는지 확인 필요
 	user.insert(make_pair(id, pw));
 	cout << "\n\n회원가입이 완료되었습니다.\n";

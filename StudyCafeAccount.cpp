@@ -11,10 +11,12 @@ int StudyCafeAccount::getSex() {
 	return sex;
 }
 int StudyCafeAccount::Menu() {
-	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 뒤로 가기:3 >> ";
+	cout << "\n********홍익 독서실에 오신 것을 환영합니다********\n";
+	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 시작 페이지로 가기:3 >> ";
 	string input;
 	while (1) {
 		cin >> input;
+		cout << "\n--------------------------------------------------------------------\n"; //표준
 		if (input.length() == 1 && input[0] == 49) {
 			cout << "\n회원가입을 시작합니다.\n\n";
 			return 0;
@@ -52,11 +54,18 @@ void StudyCafeAccount::set() { //회원가입
 	this->id = userID;
 	cout << "아이디는 " << userID << "입니다.\n";
 	addUserID();
-
-	cout << "비밀번호를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
 	string pw;
-	cin >> pw;
-
+	while (1) {
+		cout << "비밀번호를 입력하십시오(영문 소문자와 숫자 포함 최소 9자 이상 공백 포함 불가): ";
+		
+		cin >> pw;
+		if (pw.size() >= 9) {
+			break;
+		}
+		else {
+			cout << "\n잘못된 입력입니다.\n다시 ";
+		}
+	}
 	//요구 사항 준수했는지 확인 필요
 	user.insert(make_pair(id, pw));
 	cout << "\n\n회원가입이 완료되었습니다.\n";

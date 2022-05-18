@@ -30,8 +30,8 @@ void Menu::getMenu() {
 	BookRestaurant*q = new BookRestaurant();
 	BookStudyCafe*r = new BookStudyCafe();
 	string input;
-	cout << "원하는 서비스를 선택하세요\n";
 	while (1) {
+		cout << "원하는 서비스를 선택하세요\n";
 		cout << "\n비행기 예약:1 식당 예약:2 독서실 예약:3 종료:4 >> ";
 		cin >> selectMenu;
 		int selected;
@@ -87,22 +87,33 @@ void Menu::getMenu() {
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
-							cout << "예약 또는 Walk-in 중에 하나를 선택해주세요\n" << "예약:1 Walk-in:2 >> ";
+							cout << "7세 이하의 미취학 아동이 있습니까? (y/n) >> ";
 							cin >> input;
-
-							if (input.length() == 1 && input[0] == 49) {
-								tmp = q->Book();
+							if (input == "y") {
+								cout << "저희 식당을 이용할 수 없습니다.\n죄송합니다.";
+								break;
 							}
-							else if (input.length() == 1 && input[0] == 50) {
-								string Current = ruser->getCurrentUser();
-								tmp = q->WalkIn(Current);
-								
+							else if (input == "n") {
+								while (tmp != 1) {
+									cout << "예약 또는 Walk-in 중에 하나를 선택해주세요\n" << "예약:1 Walk-in:2 >> ";
+									cin >> input;
+
+									if (input.length() == 1 && input[0] == 49) {
+										tmp = q->Book();
+									}
+									else if (input.length() == 1 && input[0] == 50) {
+										string Current = ruser->getCurrentUser();
+										tmp = q->WalkIn(Current);
+
+									}
+									else {
+										cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+									}
+								}
 							}
 							else {
 								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
 							}
-
-							
 						}
 
 					}
@@ -168,7 +179,7 @@ void Menu::getMenu() {
 			}
 		}
 		else if (selectMenu[0] == 52) {
-			cout << "\n프로그램을 종료합니다.\n이용해주셔서 감사합니다.";
+			cout << "\n프로그램을 종료합니다.\n이용해주셔서 감사합니다.\n\n";
 			break;
 		}
 		else {

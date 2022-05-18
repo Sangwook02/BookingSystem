@@ -5,10 +5,12 @@ RestaurantAccount::RestaurantAccount() {
 }
 
 int RestaurantAccount::Menu() {
-	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 뒤로 가기:3 >> ";
+	cout << "\n********홍익 식당에 오신 것을 환영합니다********\n";
+	cout << "\n메뉴를 선택하세요.\n회원가입:1 로그인:2 시작 페이지로 가기:3 >> ";
 	string input;
 	while (1) {
 		cin >> input;
+		cout << "\n--------------------------------------------------------------------\n"; //표준
 		if (input.length() == 1 && input[0] == 49) {
 			cout << "\n회원가입을 시작합니다.\n\n";
 			return 0;

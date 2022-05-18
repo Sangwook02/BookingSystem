@@ -9,13 +9,19 @@ int BookFlight::Book() {
 		setTime();
 		getFlightCode();
 	}
-	else {
+	else {//왕복의 경우
+		
 		setWhereToWhere();
 		setDate();
 		setTime();
 		getFlightCode();
-
-		setWhereToWhere();
+		this->flightCode = "";
+		string tmp;
+		tmp = this->departure;
+		this->departure = this->arrival;
+		this->arrival = tmp;
+		this->flightCode += this->departure;
+		this->flightCode += this->arrival;
 		setDate();
 		setTime();
 		getFlightCode();

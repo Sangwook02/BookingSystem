@@ -51,12 +51,19 @@ void Menu::getMenu() {
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
-							cout << "예매:1 예약 정보 조회:2 예약 취소:3 >> ";
+							cout << "예매:1 예약 정보 조회:2 예약 취소:3 내 마일리지 조회:4 로그아웃:5 >> ";
 							string input;
 
 							cin >> input;
 							if (input.length() == 1 && input[0] == 49) {
 								tmp = p->Book(Current);
+								for (int u = 0; u < flightSize; u++) {
+									if (user[u].getID() == Current) {
+										user[u].addMileage();
+										break;
+									}
+								}
+
 							}
 							else if (input.length() == 1 && input[0] == 50) {
 								for (int q = 0; q < dataFlightCode.size(); q++) {
@@ -68,6 +75,17 @@ void Menu::getMenu() {
 							}
 							else if (input.length() == 1 && input[0] == 51) {
 								p->cancel(Current);
+							}
+							else if (input.length() == 1 && input[0] == 52) {
+								for (int u = 0; u < flightSize; u++) {
+									if (user[u].getID() == Current) {
+										cout << "회원님의 마일리지는 "<< user[u].showMileage()<< "km입니다.\n\n";
+										break;
+									}
+								}
+							}
+							else if (input.length() == 1 && input[0] == 53) {
+								break;
 							}
 							else {
 								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
@@ -111,10 +129,6 @@ void Menu::getMenu() {
 							cout << "예약/WALK IN:1 예약 정보 조회:2 예약 취소:3 >> ";
 							string input;
 							cin >> input;
-
-							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
-							
-
 
 
 							if (input.length() == 1 && input[0] == 49) {

@@ -11,6 +11,28 @@ string Airport::getCode() {
 }
 int Airport::take(int a, int b, int c) {
 	f[a][b][c].showLeftSeat();
+	string input;
+	cout << "예산을 입력하세요. >> ";
+	cin >> input;
+	int number = 0, tmp;
+	int size = (int)input.size();
+	for (int i = 0; i < input.size(); i++) {
+		tmp = input[i] - '0';
+		size -= 1;
+		number += tmp * pow(10, size);
+	}
+	
+
+	if (number >= 150000) {
+		cout << "비즈니스석을 추천합니다.\n";
+	}
+	else if (number >= 80000) {
+		cout << "이코노미석을 추천합니다.\n";
+	}
+	else {
+		cout << "예산이 부족합니다.\n";
+	}
+
 	int pick;
 	while (1) {
 		cout << "예약할 좌석의 번호를 입력해주세요. >> ";

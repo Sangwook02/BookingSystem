@@ -32,3 +32,7 @@ int FlightAccount::Menu() {
 		}
 	}
 }
+
+int FlightAccount::showMileage() {
+	return mileage;
+}

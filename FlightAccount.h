@@ -12,5 +12,6 @@ public:
 	FlightAccount();
 	void addMileage();
 	int Menu();
+	int showMileage();
 };
 #endif

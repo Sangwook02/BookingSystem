@@ -6,11 +6,11 @@ Flight::Flight() {
 	}
 }
 void Flight::setStatus(int idx) {
-	if (this->status[idx] = 0) {
+	if (this->status[idx] == 0) {
 		this->status[idx] = 1;
 	}
 	else {
-		this->status[idx] = 1;
+		this->status[idx] = 0;
 	}
 }
 

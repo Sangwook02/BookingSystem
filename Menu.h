@@ -6,6 +6,7 @@
 #include "StudyCafeAccount.h"
 
 
+
 class Menu {
 	FlightAccount* user;
 	int flightSize;

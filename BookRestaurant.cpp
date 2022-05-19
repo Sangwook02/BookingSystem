@@ -1,12 +1,15 @@
 ﻿#include "BookRestaurant.h"
 #include <cstring>
 
-int BookRestaurant::take(int n) {
-	int part = 1+time;
+int BookRestaurant::take(int n, string id) {
+	int part = time;
 	part += 4 * date;
 	if (t[part][n].Status() == true) {
 		t[part][n].setStatus();
 		cout << "예약이 완료 되었습니다.\n\n";
+		dataRestaurantID.push_back(id);
+		dataRestaurantTime.push_back(part);
+		dataRestaurantTable.push_back(n);
 		return 1;
 	}
 	else {
@@ -31,8 +34,18 @@ BookRestaurant::BookRestaurant() {
 		t[i][8].setTable("8", 6);
 	}
 }
+void BookRestaurant::cancel(string id) {
+	for (int i = 0; i < dataRestaurantID.size(); i++) {
+		if (dataRestaurantID[i] == id) {
+			dataRestaurantID[i] = "";
+			dataRestaurantTime[i] = -1;
+			dataRestaurantTable[i] = -1;
 
-int BookRestaurant::Book() {
+		}
+	}
+	cout << "예약이 모두 취소되었습니다.\n\n";
+}
+int BookRestaurant::Book(string id) {
 	setDate();
 	setTime();
 	int part = 1 + time;
@@ -66,32 +79,32 @@ int BookRestaurant::Book() {
 		if (input.length() == 1) {
 			if (input[0] == 48) {
 				tmp = 0;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else if (input[0] == 49) {
 				tmp = 1;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else if (input[0] == 50) {
 				tmp = 2;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else if (input[0] == 51) {
 				tmp = 3;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else if (input[0] == 52) {
 				tmp = 4;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else if (input[0] == 53) {
 				tmp = 5;
-				b = take(tmp);
+				b = take(tmp, id);
 				continue;
 			}
 			else {
@@ -206,20 +219,23 @@ int BookRestaurant::WalkIn(string id) {
 		cout << "예약 가능한 인원 수가 아닙니다.\n\n";
 	}
 	
+	while (1)
+	{
+		cout << "\n로그아웃:1 계속 예약하기:2 >> ";
+		string input;
+		cin >> input;
 
-	cout << "\n로그아웃:1 계속 예약하기:2 >> ";
-	string input;
-	cin >> input;
-
-	if (input.length() == 1 && input[0] == 49) {
-		return 1;
+		if (input.length() == 1 && input[0] == 49) {
+			return 1;
+		}
+		else if (input.length() == 1 && input[0] == 50) {
+			return 0;
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
 	}
-	else if (input.length() == 1 && input[0] == 50) {
-		return 0;
-	}
-	else {
-		cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
-	}
+	
 }
 
 void BookRestaurant::setTime() {
@@ -230,19 +246,19 @@ void BookRestaurant::setTime() {
 	if (input.length() == 1) {
 		if (input[0] == 49) {
 			cout << "런치 12시를 선택했습니다.\n\n";
-			this->time = 12;
+			this->time = 1;
 		}
 		else if (input[0] == 50) {
 			cout << "런치 13시를 선택했습니다.\n\n";
-			this->time = 13;
+			this->time = 2;
 		}
 		else if (input[0] == 51) {
 			cout << "디너 18시를 선택했습니다.\n\n";
-			this->time = 18;
+			this->time = 3;
 		}
 		else if (input[0] == 52) {
 			cout << "디너 19시를 선택했습니다.\n\n";
-			this->time = 19;
+			this->time = 4;
 		}
 		else {
 			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";

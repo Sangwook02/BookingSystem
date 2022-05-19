@@ -7,6 +7,12 @@ using namespace std;
 #include "Account.h"
 #include "Table.h"
 
+
+
+extern vector<string> dataRestaurantID;
+extern vector<int> dataRestaurantTime;
+extern vector<int> dataRestaurantTable;
+
 class BookRestaurant {
 	queue<string>four_q;
 	queue<string>six_q;
@@ -17,13 +23,14 @@ class BookRestaurant {
 
 public:
 	BookRestaurant();
-	int Book();
+	int Book(string id);
+	void cancel(string id);
 	int WalkIn(string id);
 	void setTime();
 	void setDate();
 	int getFour_q_size();
 	int getSix_q_size();
-	int take(int n);
+	int take(int n, string id);
 };
 
 #endif

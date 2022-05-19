@@ -7,6 +7,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 Menu::Menu() {
 	this->flightSize = 0;
 	user = new FlightAccount[1000]; // 수정 필요
@@ -69,7 +71,7 @@ void Menu::getMenu() {
 							}
 							else {
 								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
-				}
+							}
 						}
 					}
 					else if (i == 0) {
@@ -91,7 +93,6 @@ void Menu::getMenu() {
 					break;
 				}
 			}
-			
 		}
 		else if (selectMenu[0] == 50) {
 			while (1) {
@@ -106,35 +107,68 @@ void Menu::getMenu() {
 						int tmp = 0;
 						
 						while (tmp != 1) {
-							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
-							cout << "7세 이하의 미취학 아동이 있습니까? (y/n) >> ";
+							string Current = ruser->getCurrentUser();
+							cout << "예약/WALK IN:1 예약 정보 조회:2 예약 취소:3 >> ";
 							string input;
 							cin >> input;
-							if (input == "y") {
-								cout << "저희 식당을 이용할 수 없습니다.\n죄송합니다.";
-								break;
-							}
-							else if (input == "n") {
-								while (tmp != 1) {
-									cout << "예약 또는 Walk-in 중에 하나를 선택해주세요\n" << "예약:1 Walk-in:2 >> ";
-									cin >> input;
 
-									if (input.length() == 1 && input[0] == 49) {
-										tmp = q->Book();
-									}
-									else if (input.length() == 1 && input[0] == 50) {
-										string Current = ruser->getCurrentUser();
-										tmp = q->WalkIn(Current);
+							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
+							
 
-									}
-									else {
-										cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+
+
+							if (input.length() == 1 && input[0] == 49) {
+								cout << "7세 이하의 미취학 아동이 있습니까? (y/n) >> ";
+								cin >> input;
+								if (input == "y") {
+									cout << "저희 식당을 이용할 수 없습니다.\n죄송합니다.";
+									break;
+								}
+								else if (input == "n") {
+									while (tmp != 1) {
+										cout << "예약 또는 Walk-in 중에 하나를 선택해주세요\n" << "예약:1 Walk-in:2 >> ";
+										cin >> input;
+
+										if (input.length() == 1 && input[0] == 49) {
+											tmp = q->Book(Current);
+										}
+										else if (input.length() == 1 && input[0] == 50) {
+											tmp = q->WalkIn(Current);
+
+										}
+										else {
+											cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+										}
 									}
 								}
+								else {
+									cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+								}
+							}
+							else if (input.length() == 1 && input[0] == 50) {
+								for (int q = 0; q < dataRestaurantID.size(); q++) {
+
+									if (dataRestaurantID[q] == Current) {
+										cout << ((int)dataRestaurantTime[q] / 4)+17 << "일 " << ((int)dataRestaurantTime[q] % 4) << "시에 "<< dataRestaurantTable[q]<<"번 테이블 예약되어 있습니다.\n";
+									}
+								}
+								cout << "\n";
+							}
+							else if (input.length() == 1 && input[0] == 51) {
+								q->cancel(Current);
 							}
 							else {
 								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
 							}
+
+
+
+
+
+
+
+
+							
 						}
 
 					}

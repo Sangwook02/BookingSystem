@@ -1,5 +1,7 @@
 ﻿#include "Account.h"
-
+int Account::getNumberOfBook() {
+	return numberOfBooking;
+}
 string Account::getCurrentUser() {
 	return currentUserID;
 }
@@ -12,7 +14,12 @@ Account::Account() {
 	this->name = "";
 	this->numberOfBooking = 0;
 }
-
+void Account::addNumberOfBook() {
+	numberOfBooking++;
+}
+void Account::subNumberOfBook() {
+	numberOfBooking--;
+}
 void Account::setUser(int n) { //회원가입
 	cout << "이름을 입력하십시오: ";
 	string name;

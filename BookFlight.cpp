@@ -199,7 +199,6 @@ void BookFlight::setDate() {
 				this->date = number - 17;
 				this->flightCode += input[3];
 				this->flightCode += input[4];
-				cout << date;
 				cout << "\n";
 				break;
 			}

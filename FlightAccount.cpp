@@ -6,6 +6,9 @@
 FlightAccount::FlightAccount() {
 	this->mileage = 0;
 }
+void FlightAccount::subMileage() {
+	this->mileage -= 100;
+}
 void FlightAccount::addMileage() {
 	this->mileage += 100;
 }

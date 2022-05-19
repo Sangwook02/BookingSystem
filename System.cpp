@@ -13,6 +13,10 @@ vector<string> dataRestaurantID;
 vector<int> dataRestaurantTime;
 vector<int> dataRestaurantTable;
 
+vector<int> dataStudyCafeTime;
+vector<int> dataStudyCafeID;
+vector<int> dataStudyCafeSeat;
+
 int main() {
 	Menu run;
 	run.getMenu();

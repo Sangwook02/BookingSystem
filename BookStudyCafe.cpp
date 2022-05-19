@@ -3,6 +3,8 @@
 int BookStudyCafe::take(int part, int a, int b, int sex) {
 	if (s[part][a][b].Status() == true) {
 		s[part][a][b].setStatus(sex);
+		dataStudyCafeSeat.push_back(15*a + b);
+		dataStudyCafeTime.push_back(part);
 		cout << "예약이 완료 되었습니다.\n\n";
 		return 1;
 	}
@@ -12,9 +14,18 @@ int BookStudyCafe::take(int part, int a, int b, int sex) {
 	}
 }
 
+void BookStudyCafe::cancel(int id) {
+	for (int i = 0; i < dataStudyCafeID.size(); i++) {
+		if (dataStudyCafeID[i] == id) {
+			dataStudyCafeID[i] = -1;
+			dataStudyCafeTime[i] = -1;
+			dataStudyCafeSeat[i] = -1;
 
+		}
+	}
+}
 
-int BookStudyCafe::Book(int sex) {
+int BookStudyCafe::Book(int sex, int id) {
 	int number = 0,tmp;
 	string num;
 	while (1) {
@@ -89,6 +100,7 @@ int BookStudyCafe::Book(int sex) {
 				}
 				if (number < 225 && number >= 0) {
 					b = take(14 * date + i, (number / 15), (number % 15), sex);
+					dataStudyCafeID.push_back(id);
 				}
 				else {
 					cout << "잘못된 입력입니다. 다시 입력해주세요.\n";
@@ -171,8 +183,9 @@ void BookStudyCafe::setTime() {
 void BookStudyCafe::setDate() {
 	string input;
 	int tmp;
-	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n이용 날짜를 입력하세요(예: 05 19) >> ";
+	cout << "\n오늘은 05월 16일입니다. 17일부터 23일까지 에약이 가능합니다.\n이용 날짜를 입력하세요(예: 05 19) ";
 	while (1) {
+		cout << ">> ";
 		cin.ignore();
 		getline(cin, input);
 
@@ -182,8 +195,12 @@ void BookStudyCafe::setDate() {
 				tmp = input[3] - '0';
 				number += tmp * 10;
 				number += input[4] - '0';
-
+				if (number < 17) {
+					cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+					continue;
+				}
 				this->date = number - 17;
+				cout << "\n\n";
 				break;
 			}
 			else {

@@ -2,9 +2,15 @@
 #define BOOKSTUDYCAFE_H
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Seat.h"
 
 using namespace std;
+
+
+extern vector<int> dataStudyCafeTime;
+extern vector<int> dataStudyCafeID;
+extern vector<int> dataStudyCafeSeat;
 
 class BookStudyCafe {
 	int date;
@@ -15,7 +21,8 @@ public:
 	BookStudyCafe();
 	void setDate();
 	void setTime();
-	int Book(int s);
+	void cancel(int id);
+	int Book(int s, int id);
 	int take(int part, int a, int b, int sex);
 };
 

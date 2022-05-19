@@ -51,7 +51,7 @@ void Menu::getMenu() {
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
-							cout << "예매:1 예약 정보 조회:2 예약 취소:3 내 마일리지 조회:4 로그아웃:5 >> ";
+							cout << "예매:1 예약 정보 조회:2 예약 취소:3 내 정보 조회:4 로그아웃:5 >> ";
 							string input;
 
 							cin >> input;
@@ -60,6 +60,8 @@ void Menu::getMenu() {
 								for (int u = 0; u < flightSize; u++) {
 									if (user[u].getID() == Current) {
 										user[u].addMileage();
+										user[u].getNumberOfBook();
+							
 										break;
 									}
 								}
@@ -68,18 +70,59 @@ void Menu::getMenu() {
 							else if (input.length() == 1 && input[0] == 50) {
 								for (int q = 0; q < dataFlightCode.size(); q++) {
 									if (dataFlightID[q] == Current) {
-										cout << dataFlightCode[q] << endl;
+										string codeFlight = dataFlightCode[q];
+										if (codeFlight.substr(0, 2) == "GP") {
+											cout << "김포에서 출발하여 ";
+										}
+										else if (codeFlight.substr(0, 2) == "CJ") {
+											cout << "제주에서 출발하여 ";
+										}
+										else if (codeFlight.substr(0, 2) == "KH") {
+											cout << "김해에서 출발하여 ";
+										}
+										else if (codeFlight.substr(0, 2) == "GJ") {
+											cout << "광주에서 출발하여 ";
+										}
+										else{
+											cout << "대구에서 출발하여 ";
+										}
+
+										if (codeFlight.substr(2, 2) == "GP") {
+											cout << "김포로 향하는 05월 ";
+										}
+										else if (codeFlight.substr(2, 2) == "CJ") {
+											cout << "제주로 향하는 05월 ";
+										}
+										else if (codeFlight.substr(2, 2) == "KH") {
+											cout << "김해로 향하는 05월 ";
+										}
+										else if (codeFlight.substr(2, 2) == "GJ") {
+											cout << "광주로 향하는 05월 ";
+										}
+										else {
+											cout << "대구로 향하는 05월 ";
+										}
+
+										cout << codeFlight.substr(6, 2) << "일 " << codeFlight.substr(8,2) << "시 비행기입니다.\n\n";
 									}
 								}
 								cout << "\n";
 							}
 							else if (input.length() == 1 && input[0] == 51) {
 								p->cancel(Current);
+								for (int u = 0; u < flightSize; u++) {
+									if (user[u].getID() == Current) {
+										user[u].subNumberOfBook();
+										user[u].subMileage();
+										break;
+									}
+								}
 							}
 							else if (input.length() == 1 && input[0] == 52) {
 								for (int u = 0; u < flightSize; u++) {
 									if (user[u].getID() == Current) {
-										cout << "회원님의 마일리지는 "<< user[u].showMileage()<< "km입니다.\n\n";
+										cout << "회원님의 마일리지는 "<< user[u].showMileage()<< "km입니다.\n";
+										cout << "회원님의 예약 횟수는 " << user[u].getNumberOfBook() << "입니다.\n\n";
 										break;
 									}
 								}
@@ -126,7 +169,7 @@ void Menu::getMenu() {
 						
 						while (tmp != 1) {
 							string Current = ruser->getCurrentUser();
-							cout << "예약/WALK IN:1 예약 정보 조회:2 예약 취소:3 >> ";
+							cout << "예약/WALK IN:1 예약 정보 조회:2 예약 취소:3 내 정보:4>> ";
 							string input;
 							cin >> input;
 
@@ -171,15 +214,17 @@ void Menu::getMenu() {
 							else if (input.length() == 1 && input[0] == 51) {
 								q->cancel(Current);
 							}
+							else if (input.length() == 1 && input[0] == 52) {
+								for (int u = 0; u < restaurantSize; u++) {
+									if (ruser[u].getID() == Current) {
+										cout << "회원님의 예약 횟수는 " << ruser[u].getNumberOfBook() << "입니다.\n\n";
+										break;
+									}
+								}
+							}
 							else {
 								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
 							}
-
-
-
-
-
-
 
 
 							
@@ -220,10 +265,52 @@ void Menu::getMenu() {
 					if (i == 1) {
 						//예약
 						int now;
+						int current;
 						while (tmp == 0) {
-							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
+							cout << "\n예약:1 예약 조회:2 예약 취소:3 내 정보 조회:4 >> ";
 							now = suser->getCurrentUserSex();
-							tmp = r->Book(now);
+							current = suser->getCurrentUser();
+							string input;
+							cin >> input;
+
+							if (input.length() == 1 && input[0] == 49) {
+								tmp = r->Book(now,current);
+								for (int u = 0; u < studyCafeSize; u++) {
+									if (suser[u].getID() == current) {
+										suser[u].addNumberOfBook();
+										break;
+									}
+								}
+
+							}
+
+
+							else if (input.length() == 1 && input[0] == 50) {
+								for (int q = 0; q < dataStudyCafeID.size(); q++) {
+
+									if (dataStudyCafeID[q] == current) {
+										cout << ((int)dataStudyCafeTime[q] / 14) + 17 << "일 " << ((int)dataStudyCafeTime[q] % 14)+9 << "시에 " << dataStudyCafeSeat[q] << "번 자리 예약되어 있습니다.\n";
+									}
+								}
+								cout << "\n";
+							}
+							else if (input.length() == 1 && input[0] == 51) {
+								r->cancel(current);
+							}
+
+							else if (input.length() == 1 && input[0] == 52) {
+								for (int u = 0; u < studyCafeSize; u++) {
+									if (suser[u].getID() == current) {
+										cout << "회원님의 예약 횟수는 " << suser[u].getNumberOfBook() << "회 입니다.\n\n";
+										tmp = 1;
+										break;
+									}
+								}
+							}
+							else {
+								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+							}
+							
 						}
 						
 					}

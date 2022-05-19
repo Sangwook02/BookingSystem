@@ -11,6 +11,7 @@ class FlightAccount:public Account {
 public:
 	FlightAccount();
 	void addMileage();
+	void subMileage();
 	int Menu();
 	int showMileage();
 };

@@ -21,6 +21,9 @@ public:
 	string getID();
 	string getCurrentUser();
 	void setCurrentUser(string id);
+	int getNumberOfBook();
+	void addNumberOfBook();
+	void subNumberOfBook();
 };
 
 #endif

@@ -28,11 +28,11 @@ void Menu::getMenu() {
 	BookFlight*p = new BookFlight();
 	BookRestaurant*q = new BookRestaurant();
 	BookStudyCafe*r = new BookStudyCafe();
-	string input;
+
 	while (1) {
 		cout << "원하는 서비스를 선택하세요\n";
 		cout << "\n비행기 예약:1 식당 예약:2 독서실 예약:3 종료:4 >> ";
-		cin >> selectMenu;
+		std::cin >> selectMenu;
 		int selected;
 
 		if (selectMenu[0] == 49) {
@@ -45,16 +45,36 @@ void Menu::getMenu() {
 				}
 				else if (selected == 1) {//로그인
 					int i = user->login(1);
+					string Current = user->getCurrentUser();
 					if (i == 1) {
 						int tmp = 0;
 						while (tmp != 1) {
-							tmp = p->Book();
-							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
+							cout << "예매:1 예약 정보 조회:2 예약 취소:3 >> ";
+							string input;
+
+							cin >> input;
+							if (input.length() == 1 && input[0] == 49) {
+								tmp = p->Book(Current);
+							}
+							else if (input.length() == 1 && input[0] == 50) {
+								for (int q = 0; q < dataFlightCode.size(); q++) {
+									if (dataFlightID[q] == Current) {
+										cout << dataFlightCode[q] << endl;
+									}
+								}
+								cout << "\n";
+							}
+							else if (input.length() == 1 && input[0] == 51) {
+								p->cancel(Current);
+							}
+							else {
+								cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+				}
 						}
 					}
 					else if (i == 0) {
 						cout << "비행기 예약 종료:1 로그인 재시도:2 >> ";
-
+						string input;
 						cin >> input;
 						if (input.length() == 1 && input[0] == 49) {
 							break;
@@ -84,9 +104,11 @@ void Menu::getMenu() {
 					int i = ruser->login(2);
 					if (i == 1) {
 						int tmp = 0;
+						
 						while (tmp != 1) {
 							//while문 안에서 switch문 >> 예약,예약 조회,예약 취소
 							cout << "7세 이하의 미취학 아동이 있습니까? (y/n) >> ";
+							string input;
 							cin >> input;
 							if (input == "y") {
 								cout << "저희 식당을 이용할 수 없습니다.\n죄송합니다.";

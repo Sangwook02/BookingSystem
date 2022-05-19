@@ -7,6 +7,7 @@ using namespace std;
 class CurrentUserStudyCafe {
 	int id;
 	int sex;
+
 public:
 	CurrentUserStudyCafe(StudyCafeAccount suser);
 	int getID();

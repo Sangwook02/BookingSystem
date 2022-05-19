@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include "Seat.h"
+
 using namespace std;
 
 class BookStudyCafe {

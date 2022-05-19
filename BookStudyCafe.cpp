@@ -40,6 +40,7 @@ int BookStudyCafe::Book(int sex) {
 	}
 	setDate();
 	setTime();
+
 	//자리 선택
 	for (int i = 0; i < 14; i++) {
 		if (time[i] == 1) {

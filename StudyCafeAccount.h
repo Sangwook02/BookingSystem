@@ -13,6 +13,7 @@ class StudyCafeAccount {
 	int id;
 	int currentUserSex;
 	int numberOfBooking;
+	int time[7] = { 0, };
 public:
 	int Menu();
 	void set();
@@ -22,6 +23,7 @@ public:
 	int getSex();
 	void setCurrentUserSex(int sex);
 	int getCurrentUserSex();
+	void addTime(int date, int hour);
 };
 
 #endif

@@ -74,9 +74,14 @@ void StudyCafeAccount::set() { //회원가입
 void StudyCafeAccount::addUserID() {
 	this->userID += 1;
 }
+
+void StudyCafeAccount::addTime(int date, int hour) {
+	time[date] += hour;
+}
 void StudyCafeAccount::setCurrentUserSex(int sex) {
 	this->currentUserSex = sex;
 }
+
 int StudyCafeAccount::getCurrentUserSex() {
 	return currentUserSex;
 }

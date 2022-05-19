@@ -12,6 +12,7 @@ public:
 	Airport(string code);
 	string getCode();
 	int take(int a,int b, int c);
+	int cancel(int a, int b, int c);
 };
 
 #endif 

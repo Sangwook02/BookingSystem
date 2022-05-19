@@ -3,9 +3,13 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <vector>
 #include "Airport.h"
 
 using namespace std;
+
+extern vector<string> dataFlightID;
+extern vector<string> dataFlightCode;
 
 class BookFlight {
 	int onewayOrRound; //왕복이면 0, 편도면 1
@@ -23,8 +27,9 @@ public:
 	void setTime();
 	void setDate();
 	void setWhereToWhere();
-	int Book();
-	void getFlightCode();
+	int Book(string id);
+	void cancel(string id);
+	string getFlightCode();
 };
 
 #endif

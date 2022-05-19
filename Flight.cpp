@@ -6,9 +6,38 @@ Flight::Flight() {
 	}
 }
 void Flight::setStatus(int idx) {
-	this->status[idx] = 1;
-	//this->seat[idx] = 
+	if (this->status[idx] = 0) {
+		this->status[idx] = 1;
+	}
+	else {
+		this->status[idx] = 1;
+	}
 }
+
+
+void Flight::showSeat() {
+	cout << "\t\t\t앞\n\n";
+	cout << "\t\t";
+
+	cout << "1\t\t";
+
+	cout << "2\n";
+	
+
+	cout << "\n\t";
+
+	for (int i = 3; i <= 5; i++) {
+		cout << i << "\t\t ";
+		
+	}
+	cout << "\n\n\t";
+	for (int i = 6; i <= 8; i++) {
+		cout << i << "\t\t ";
+		
+	}
+	cout << "\n\n\t\t\t뒤\n";
+}
+
 
 int Flight::getStatus(int idx) {
 	return this->status[idx];

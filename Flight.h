@@ -9,6 +9,7 @@ class Flight {
 public:
 	Flight();
 	void showLeftSeat();
+	void showSeat();
 	void setStatus(int idx);
 	int getStatus(int idx);
 }; 

@@ -3,7 +3,7 @@
 #include <cstring>
 
 
-int BookFlight::Book() {
+int BookFlight::Book(string id) {
 	
 	setOnewayOrRound();
 	if (this->onewayOrRound == 1) {
@@ -12,6 +12,8 @@ int BookFlight::Book() {
 		setTime();
 		getFlightCode();
 		a[this->departure].take(this->departure, this->date, time);
+		dataFlightID.push_back(id);
+		dataFlightCode.push_back(getFlightCode());
 	}
 	else {//왕복의 경우
 		
@@ -20,6 +22,8 @@ int BookFlight::Book() {
 		setTime();
 		getFlightCode();
 		a[this->departure].take(this->departure, date, time);
+		dataFlightID.push_back(id);
+		dataFlightCode.push_back(getFlightCode());
 
 		this->flightCode = "";
 		string tmp;
@@ -32,6 +36,9 @@ int BookFlight::Book() {
 		setTime();
 		getFlightCode();
 		a[this->departure].take(this->departure, date, time);
+
+		dataFlightID.push_back(id);
+		dataFlightCode.push_back(getFlightCode());
 	}
 	string input;
 	while (1) {
@@ -107,6 +114,64 @@ void BookFlight::setTime() {
 	}
 	cout << "\n";
 }
+
+void BookFlight::cancel(string id) {
+	this->flightCode = "";
+	cout << "취소할 항공편의 ";
+	setWhereToWhere(); 
+	string input;
+	int tmp;
+	cout << "\n취소할 항공편의 출발 날짜를 입력하세요(예: 05 19) >> ";
+	while (1) {
+		cin.ignore();
+		getline(cin, input);
+
+		if (input.length() == 5) {
+
+
+			if (input[2] == ' ') {
+				tmp = (int)input[0] * 10;
+				tmp += (int)input[1];
+				this->month = tmp;
+				this->flightCode += input[0];
+				this->flightCode += input[1];
+
+
+
+				int number = 0;
+				tmp = input[3] - '0';
+				number += tmp * 10;
+				number += input[4] - '0';
+				this->date = number - 17;
+				this->flightCode += input[3];
+				this->flightCode += input[4];
+				cout << date;
+				cout << "\n";
+				break;
+			}
+			else {
+				cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+			}
+		}
+		else {
+			cout << "\n옳지 않은 입력입니다.\n다시 입력해주세요.\n\n";
+		}
+	}
+
+	cout << "취소할 항공편의 ";
+	setTime();
+	for (int q = 0; q < dataFlightID.size(); q++) {
+		if (dataFlightCode[q] == flightCode && dataFlightID[q] == id) {
+			dataFlightID[q].erase();
+			dataFlightCode[q].erase();
+			break;
+		}
+	}
+
+	a[this->departure].cancel(this->departure, this->date, time);
+
+
+}
 void BookFlight::setDate() {
 	string input;
 	int tmp;
@@ -116,13 +181,24 @@ void BookFlight::setDate() {
 		getline(cin, input);
 
 		if (input.length() == 5) {
+
+
 			if (input[2] == ' ') {
+				tmp = (int)input[0] * 10;
+				tmp += (int)input[1];
+				this->month = tmp;
+				this->flightCode += input[0];
+				this->flightCode += input[1];
+
+
+
 				int number = 0;
 				tmp = input[3] - '0';
 				number += tmp * 10;
 				number += input[4] - '0';
-
 				this->date = number - 17;
+				this->flightCode += input[3];
+				this->flightCode += input[4];
 				cout << date;
 				cout << "\n";
 				break;
@@ -227,6 +303,7 @@ void BookFlight::setWhereToWhere() { //김포:1GP 제주:2CJ 김해:3KH 광주:4
 }
 
 
-void BookFlight::getFlightCode() {
+string BookFlight::getFlightCode() {
 	cout << this->flightCode << endl;
+	return flightCode;
 }
